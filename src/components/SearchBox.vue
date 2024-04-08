@@ -1,10 +1,9 @@
 <script setup lang="ts">
-import { watch } from 'vue';
+import { ref, watch } from 'vue';
 import { debounce } from '../utils/common.utils';
 
-const emit = defineEmits(['onSearch'])
-
-const model = defineModel({ type: String });
+const model = ref('');
+const emit = defineEmits(['onSearch']);
 
 watch(model, debounce(() => {
     emit('onSearch', model.value);
