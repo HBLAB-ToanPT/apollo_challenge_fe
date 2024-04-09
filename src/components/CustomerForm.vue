@@ -25,6 +25,16 @@ const onFormSubmit = () => {
 const onCancelClick = () => {
     router.push('/')
 }
+
+const onRemoveItem = (item: any) => {
+    model.value.tags = model.value.tags.filter((tag) => {
+        if (typeof tag === 'string') {
+            return tag !== item.title
+        } else {
+            return tag.title !== item.title
+        }
+    })
+}
 </script>
 
 <template>
@@ -39,10 +49,11 @@ const onCancelClick = () => {
             <v-combobox v-model="model.tags" item-title="title" item-value="id" label="Add tags" multiple outlined
                 :allow-overflow="false">
                 <template v-slot:selection="{ attrs, item, selected }">
-                    <v-chip v-bind="attrs" :input-value="selected" close-icon="mdi-close" label small closable>
+                    <v-chip v-bind="attrs" :input-value="selected" label small>
                         <span class="pr-2">
                             {{ item.title }}
                         </span>
+                        <v-icon small @click="onRemoveItem(item)">mdi-close</v-icon>
                     </v-chip>
                 </template>
             </v-combobox>

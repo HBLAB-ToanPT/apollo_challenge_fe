@@ -1,9 +1,9 @@
 <script setup lang="ts">
+import { useMutation } from '@tanstack/vue-query';
 import { useRouter } from 'vue-router';
+import { deleteCustomer } from '../apis/customer.api';
 import { ICustomer } from '../types/customer.type';
 import { joinTags } from '../utils/tag.util';
-import { useMutation } from '@tanstack/vue-query';
-import { deleteCustomer } from '../apis/customer.api';
 import { toastSuccess } from '../utils/toastify.util';
 
 const props = defineProps<{ items: ICustomer[] }>();
@@ -18,7 +18,7 @@ const onDeleteClick = (item: ICustomer) => {
     if (confirm(`Are you sure to delete ${item.name}?`)) {
         mutate(item.id, {
             onSuccess: () => {
-                toastSuccess("Delete customer successful", 1500);
+                toastSuccess("Delete customer successful");
                 emit('deleteSuccess');
             },
             onError: (error) => {

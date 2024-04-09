@@ -18,7 +18,10 @@ httpRequest.interceptors.response.use(
   },
   (err) => {
     const message =
-      err.response?.data?.detail || err.message || "Something went wrong";
+      err.response?.data?.detail ||
+      err.response?.data?.errorMessage ||
+      err.message ||
+      "Something went wrong";
     toastError(message);
     return Promise.reject(err);
   }
