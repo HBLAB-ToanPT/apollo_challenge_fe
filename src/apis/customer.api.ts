@@ -18,8 +18,8 @@ export const getCustomer = (id: number | string) => {
 export const createCustomer = (customer: ICustomerDto) => {
   const formData: any = {};
   formData.name = customer.name;
+  formData.tags = [];
   if (customer.tags && customer.tags.length) {
-    formData.tags = [];
     customer.tags.forEach((tag) => {
       if (typeof tag === "string") {
         formData.tags.push(tag);
@@ -34,8 +34,8 @@ export const createCustomer = (customer: ICustomerDto) => {
 export const updateCustomer = (id: number | string, customer: ICustomerDto) => {
   const formData: any = {};
   formData.name = customer.name;
+  formData.tags = [];
   if (customer.tags && customer.tags.length) {
-    formData.tags = [];
     customer.tags.forEach((tag) => {
       if (typeof tag === "string") {
         formData.tags.push(tag);

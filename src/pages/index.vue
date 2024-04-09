@@ -29,7 +29,11 @@ const onSearch = (text: string) => {
 }
 
 const onDeleteSuccess = () => {
-  queryClient.invalidateQueries({ queryKey: ['customers', page, keys] })
+  if (Number(data.value?.data?.numberOfElements) === 1) {
+    page.value--;
+  } else {
+    queryClient.invalidateQueries({ queryKey: ['customers', page, keys] })
+  }
 }
 
 </script>
