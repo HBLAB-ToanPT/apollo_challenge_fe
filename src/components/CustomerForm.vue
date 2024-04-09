@@ -1,13 +1,13 @@
 <script setup lang="ts">
 import { onMounted, ref } from 'vue';
 import { useRouter } from 'vue-router';
-import { ICustomer, ICustomerModel } from '../types/customer.type';
+import { ICustomer, ICustomerDto } from '../types/customer.type';
 import { nameWithRequireAnd20CharactersRules } from '../utils/validate.utils';
 
-const props = defineProps<{ title: string, customer?: ICustomer }>();
+const props = defineProps<{ title: string, customer?: ICustomer, isPending?: boolean }>();
 const emit = defineEmits(['formSubmit'])
 const router = useRouter();
-const model = ref<ICustomerModel>({ name: '', tags: [] });
+const model = ref<ICustomerDto>({ name: '', tags: [] });
 
 onMounted(() => {
     if (props.customer) {
@@ -45,7 +45,8 @@ const onCancelClick = () => {
             </v-combobox>
 
             <v-row>
-                <v-col><v-btn class="mt-2" type="submit" color="primary" block>Submit</v-btn></v-col>
+                <v-col><v-btn class="mt-2" type="submit" color="primary" block :disabled="props.isPending"
+                        :loading="isPending">Submit</v-btn></v-col>
                 <v-col><v-btn class="mt-2" type="button" color="" block @click="onCancelClick">Cancel</v-btn></v-col>
             </v-row>
         </v-form>

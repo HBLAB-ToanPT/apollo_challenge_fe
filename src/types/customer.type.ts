@@ -1,6 +1,9 @@
 export interface ITag {
   id: number;
-  name: string;
+  title: string;
+  createdTime: string;
+  updatedTime?: string;
+  delete: boolean;
 }
 
 export interface ICustomer {
@@ -9,7 +12,6 @@ export interface ICustomer {
   tags: ITag[];
 }
 
-export interface ICustomerModel {
-  name: string;
-  tags: ITag[];
+export interface ICustomerDto extends Omit<ICustomer, "id" | "tags"> {
+  tags: (ITag | string)[];
 }

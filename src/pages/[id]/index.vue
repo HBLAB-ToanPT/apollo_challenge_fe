@@ -8,7 +8,7 @@
 <script setup lang="ts">
 import { onMounted } from 'vue';
 import { useRoute } from 'vue-router';
-import { ICustomerModel } from '../../types/customer.type';
+import { ICustomerDto } from '../../types/customer.type';
 
 const route = useRoute();
 
@@ -16,7 +16,7 @@ onMounted(() => {
     console.log(route.params.id)
 })
 
-const onFormSubmit = (model: ICustomerModel) => {
+const onFormSubmit = (model: ICustomerDto) => {
     console.log(model)
 }
 </script>

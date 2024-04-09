@@ -6,6 +6,7 @@
 
 // Plugins
 import Vue3Toastify, { type ToastContainerOptions } from "vue3-toastify";
+import { VueQueryPlugin } from "@tanstack/vue-query";
 import vuetify from "./vuetify";
 import pinia from "../stores";
 import router from "../router";
@@ -21,5 +22,6 @@ export function registerPlugins(app: App) {
     .use(Vue3Toastify, {
       autoClose: 1500,
       position: "bottom-right",
-    } as ToastContainerOptions);
+    } as ToastContainerOptions)
+    .use(VueQueryPlugin);
 }
