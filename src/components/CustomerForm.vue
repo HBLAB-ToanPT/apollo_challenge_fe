@@ -7,6 +7,7 @@ import { nameWithRequireAnd20CharactersRules } from '../utils/validate.utils';
 const props = defineProps<{ title: string, customer?: ICustomer, isPending?: boolean }>();
 const emit = defineEmits(['formSubmit'])
 const router = useRouter();
+const isFormValid = ref(false);
 const model = ref<ICustomerDto>({ name: '', tags: [] });
 
 onMounted(() => {
@@ -16,7 +17,9 @@ onMounted(() => {
 })
 
 const onFormSubmit = () => {
-    emit('formSubmit', model.value);
+    if (isFormValid.value) {
+        emit('formSubmit', model.value);
+    }
 }
 
 const onCancelClick = () => {
@@ -27,7 +30,7 @@ const onCancelClick = () => {
 <template>
     <div class="w-100">
         <h1 class="text-h2">{{ props.title }}</h1>
-        <v-form class="mt-6" @submit.prevent="onFormSubmit">
+        <v-form v-model="isFormValid" class="mt-6" @submit="onFormSubmit">
             <!-- Customer name -->
             <v-text-field v-model="model.name" :rules="nameWithRequireAnd20CharactersRules"
                 label="Customer name"></v-text-field>
