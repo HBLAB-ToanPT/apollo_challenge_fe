@@ -48,8 +48,8 @@ const onDeleteSuccess = () => {
         </template>Add customer</v-btn>
     </div>
     <template v-if="!isPending">
-      <Customers class="mt-6" :items="data.data.content" @deleteSuccess="onDeleteSuccess" />
-      <v-pagination v-model="page" :length="data.data.totalPages" rounded="circle"></v-pagination>
+      <Customers class="mt-6" :items="data?.data?.content" @deleteSuccess="onDeleteSuccess" />
+      <v-pagination v-model="page" :length="data?.data?.totalPages" rounded="circle"></v-pagination>
     </template>
     <v-skeleton-loader v-if="isPending" type="table-tbody">
     </v-skeleton-loader>

@@ -13,9 +13,4 @@ const router = createRouter({
   extendRoutes: setupLayouts,
 })
 
-/* Do guard route here */
-router.beforeEach((to, from, next) => {
-  next();
-});
-
 export default router

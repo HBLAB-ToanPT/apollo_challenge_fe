@@ -49,7 +49,7 @@ const onUpdateClick = (item: ICustomer) => {
             </tr>
         </thead>
         <tbody>
-            <template v-if="props.items.length">
+            <template v-if="props.items?.length">
                 <tr v-for="item in props.items" :key="item.id">
                     <td>{{ item.name }}</td>
                     <td>{{ joinTags(item.tags) }}</td>
@@ -61,7 +61,7 @@ const onUpdateClick = (item: ICustomer) => {
                     </td>
                 </tr>
             </template>
-            <tr class="empty" v-if="!props.items.length">
+            <tr class="empty" v-if="!props.items?.length">
                 <td colspan="4">No data found</td>
             </tr>
         </tbody>
