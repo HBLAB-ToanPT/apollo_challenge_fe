@@ -9,12 +9,13 @@ import { useRouter } from 'vue-router';
 const router = useRouter();
 const page = ref(1);
 const size = ref(10);
+const sort = ref('id,asc')
 const keys = ref<string[]>([]);
 
 const queryClient = useQueryClient()
 const { isPending, data } = useQuery({
   queryKey: ['customers', page, keys],
-  queryFn: () => getCustomers({ page: page.value, size: size.value, keys: keys.value }),
+  queryFn: () => getCustomers({ page: page.value, size: size.value, sort: sort.value, keys: keys.value }),
   retry: 1,
 });
 
