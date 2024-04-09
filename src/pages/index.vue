@@ -12,9 +12,9 @@ const size = ref(10);
 const keys = ref<string[]>([]);
 
 const { isPending, data } = useQuery({
-  queryKey: ['todos', page, keys],
+  queryKey: ['customers', page, keys],
   queryFn: () => getCustomers({ page: page.value, size: size.value, keys: keys.value }),
-  retry: 3,
+  retry: 1,
 });
 
 const onAddCustomerClick = () => {
@@ -22,6 +22,7 @@ const onAddCustomerClick = () => {
 }
 
 const onSearch = (text: string) => {
+  page.value = 1;
   keys.value = text.split(',').map(key => key.trim());
 }
 

@@ -1,9 +1,3 @@
-<template>
-    <v-container>
-        <CustomerForm title="Create new Customer" :isPending="isPending" @formSubmit="onFormSubmit" />
-    </v-container>
-</template>
-
 <script setup lang="ts">
 import { useRouter } from 'vue-router';
 import { createCustomer } from '../../apis/customer.api';
@@ -30,5 +24,11 @@ const onFormSubmit = (customer: ICustomerDto) => {
     })
 }
 </script>
+
+<template>
+    <v-container>
+        <CustomerForm title="Create new Customer" @formSubmit="onFormSubmit" :isPending="isPending" />
+    </v-container>
+</template>
 
 <style scoped></style>

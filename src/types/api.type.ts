@@ -1,4 +1,4 @@
-export interface IApiResponseWithPagination<T> {
+export interface IPagination<T> {
   content: T;
   pageable: IPageable;
   last: boolean;
