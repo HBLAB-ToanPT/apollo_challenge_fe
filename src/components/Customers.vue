@@ -2,13 +2,31 @@
 import { useRouter } from 'vue-router';
 import { ICustomer } from '../types/customer.type';
 import { joinTags } from '../utils/tag.util';
+import { useMutation } from '@tanstack/vue-query';
+import { deleteCustomer } from '../apis/customer.api';
+import { toastSuccess } from '../utils/toastify.util';
 
 const props = defineProps<{ items: ICustomer[] }>();
 const emit = defineEmits(['deleteSuccess']);
 const router = useRouter();
 
+const { mutate } = useMutation({
+    mutationFn: (id: number) => deleteCustomer(id),
+})
+
 const onDeleteClick = (item: ICustomer) => {
-    console.log(item)
+    if (confirm(`Are you sure to delete ${item.name}?`)) {
+        mutate(item.id, {
+            onSuccess: () => {
+                toastSuccess("Delete customer successful", 1500);
+                emit('deleteSuccess');
+            },
+            onError: (error) => {
+                console.log(error)
+            },
+        }
+        )
+    }
 }
 const onUpdateClick = (item: ICustomer) => {
     router.push(`/${item.id}`);
@@ -31,17 +49,23 @@ const onUpdateClick = (item: ICustomer) => {
             </tr>
         </thead>
         <tbody>
-            <tr v-for="item in props.items" :key="item.id">
-                <td>{{ item.name }}</td>
-                <td>{{ joinTags(item.tags) }}</td>
-                <td class="actions">
-                    <v-btn class="" color="red-lighten-2" icon="mdi-pencil" variant="text"
-                        @click="onUpdateClick(item)"></v-btn>
-                    <v-btn class="" color="red-lighten-2" icon="mdi-trash-can-outline" variant="text"
-                        @click="onDeleteClick(item)"></v-btn>
-                </td>
+            <template v-if="props.items.length">
+                <tr v-for="item in props.items" :key="item.id">
+                    <td>{{ item.name }}</td>
+                    <td>{{ joinTags(item.tags) }}</td>
+                    <td class="actions">
+                        <v-btn class="" color="blue-lighten-2" icon="mdi-pencil" variant="text"
+                            @click="onUpdateClick(item)"></v-btn>
+                        <v-btn class="" color="red-lighten-2" icon="mdi-trash-can-outline" variant="text"
+                            @click="onDeleteClick(item)"></v-btn>
+                    </td>
+                </tr>
+            </template>
+            <tr class="empty" v-if="!props.items.length">
+                <td colspan="4">No data found</td>
             </tr>
         </tbody>
+
     </v-table>
 </template>
 
@@ -49,5 +73,10 @@ const onUpdateClick = (item: ICustomer) => {
 .actions {
     width: 200px;
     text-align: center !important;
+}
+
+.empty {
+    padding: 24px 0;
+    text-align: center;
 }
 </style>
