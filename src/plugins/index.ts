@@ -5,21 +5,33 @@
  */
 
 // Plugins
-import Vue3Toastify, { type ToastContainerOptions } from "vue3-toastify";
-import vuetify from "./vuetify";
-import pinia from "../stores";
+import { VueQueryPlugin, VueQueryPluginOptions } from "@tanstack/vue-query";
+import ToastPlugin from "vue-toast-notification";
 import router from "../router";
+import pinia from "../stores";
+import vuetify from "./vuetify";
 
 // Types
 import type { App } from "vue";
 
+const vueQueryPluginOptions: VueQueryPluginOptions = {
+  queryClientConfig: {
+    defaultOptions: {
+      queries: {
+        refetchOnWindowFocus: false,
+      },
+    },
+  },
+};
+
 export function registerPlugins(app: App) {
   app
     .use(vuetify)
-    .use(router)
     .use(pinia)
-    .use(Vue3Toastify, {
-      autoClose: 1500,
+    .use(ToastPlugin, {
       position: "bottom-right",
-    } as ToastContainerOptions);
+      autoClose: 1500,
+    })
+    .use(router)
+    .use(VueQueryPlugin, vueQueryPluginOptions);
 }
