@@ -1,11 +1,12 @@
-import { toast } from "vue3-toastify";
+import { useToast } from "vue-toast-notification";
+const $toast = useToast();
 
-export const toastSuccess = (message: string, autoClose = 1500) => {
-  toast(message, { type: "success", autoClose });
+export const toastSuccess = (message: string) => {
+  $toast.success(message);
 };
-export const toastError = (message: string, autoClose = 1500) => {
-  toast(message, { type: "error", autoClose });
+export const toastError = (message: string) => {
+  $toast.error(message);
 };
-export const toastWarning = (message: string, autoClose = 1500) => {
-  toast(message, { type: "warning", autoClose });
+export const toastWarning = (message: string) => {
+  $toast.warning(message);
 };

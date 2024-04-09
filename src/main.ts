@@ -6,6 +6,7 @@
 import { registerPlugins } from "@/plugins";
 import App from "./App.vue";
 import "vue3-toastify/dist/index.css";
+import 'vue-toast-notification/dist/theme-bootstrap.css';
 import { createApp } from "vue";
 
 const app = createApp(App);

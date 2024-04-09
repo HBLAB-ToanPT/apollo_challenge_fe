@@ -2742,6 +2742,11 @@ vue-template-compiler@^2.7.14:
     de-indent "^1.0.2"
     he "^1.2.0"
 
+vue-toast-notification@^3.1.2:
+  version "3.1.2"
+  resolved "https://registry.yarnpkg.com/vue-toast-notification/-/vue-toast-notification-3.1.2.tgz#55106acc4f2c17ecf84468ee9435b97fc7106748"
+  integrity sha512-oNRL/W9aaHoeScp+iTIW7k09vM16/+8aptp2maa+7qTB43JuxmAgKdXKFYtf+uvSNOYYq2BIWgLCeJ61pwom/A==
+
 vue-tsc@^2.0.6:
   version "2.0.11"
   resolved "https://registry.yarnpkg.com/vue-tsc/-/vue-tsc-2.0.11.tgz#6d606207aa7f1f5b422b8ef40056f10031c879f2"
@@ -2750,11 +2755,6 @@ vue-tsc@^2.0.6:
     "@volar/typescript" "~2.2.0-alpha.6"
     "@vue/language-core" "2.0.11"
     semver "^7.5.4"
-
-vue3-toastify@^0.2.1:
-  version "0.2.1"
-  resolved "https://registry.yarnpkg.com/vue3-toastify/-/vue3-toastify-0.2.1.tgz#d3999c9f29add53416b0bc23f3ede81cf724b654"
-  integrity sha512-u4i5LCu1q5qs4L4Kbjb4u8NipCS8ox1fCHQ6XFS62676xnA6Q/AJRpZEkAurTMp723LeH6eQX6k9+24bKf1T4Q==
 
 vue@^3.4.21:
   version "3.4.21"

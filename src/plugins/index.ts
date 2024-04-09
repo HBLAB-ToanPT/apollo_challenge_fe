@@ -6,6 +6,7 @@
 
 // Plugins
 import Vue3Toastify, { type ToastContainerOptions } from "vue3-toastify";
+import ToastPlugin from "vue-toast-notification";
 import { VueQueryPlugin, VueQueryPluginOptions } from "@tanstack/vue-query";
 import vuetify from "./vuetify";
 import pinia from "../stores";
@@ -22,7 +23,7 @@ const vueQueryPluginOptions: VueQueryPluginOptions = {
       },
     },
   },
-}
+};
 
 export function registerPlugins(app: App) {
   app
@@ -33,6 +34,10 @@ export function registerPlugins(app: App) {
       position: "bottom-right",
       pauseOnFocusLoss: false,
     } as ToastContainerOptions)
+    .use(ToastPlugin, {
+      position: "bottom-right",
+      autoClose: 1500,
+    })
     .use(router)
     .use(VueQueryPlugin, vueQueryPluginOptions);
 }

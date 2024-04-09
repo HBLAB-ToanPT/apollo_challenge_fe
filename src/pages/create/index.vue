@@ -1,10 +1,9 @@
 <script setup lang="ts">
+import { useMutation } from '@tanstack/vue-query';
 import { useRouter } from 'vue-router';
 import { createCustomer } from '../../apis/customer.api';
 import { ICustomerDto } from '../../types/customer.type';
-import { useMutation } from '@tanstack/vue-query'
 import { toastSuccess } from '../../utils/toastify.util';
-
 const router = useRouter();
 
 const { isPending, mutate } = useMutation({
@@ -15,7 +14,7 @@ const { isPending, mutate } = useMutation({
 const onFormSubmit = (customer: ICustomerDto) => {
     mutate(customer, {
         onSuccess: () => {
-            toastSuccess('Create new customer successful', 1500);
+            toastSuccess('Create new customer successful');
             router.push('/');
         },
         onError: (error) => {
