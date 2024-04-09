@@ -46,3 +46,7 @@ export const updateCustomer = (id: number | string, customer: ICustomerDto) => {
   }
   return httpRequest.put<ICustomer>("/api/v1/customers/" + id, formData);
 };
+
+export const deleteCustomer = (id: number | string) => {
+  return httpRequest.delete("/api/v1/customers/" + id);
+};

@@ -2,13 +2,31 @@
 import { useRouter } from 'vue-router';
 import { ICustomer } from '../types/customer.type';
 import { joinTags } from '../utils/tag.util';
+import { useMutation } from '@tanstack/vue-query';
+import { deleteCustomer } from '../apis/customer.api';
+import { toastSuccess } from '../utils/toastify.util';
 
 const props = defineProps<{ items: ICustomer[] }>();
 const emit = defineEmits(['deleteSuccess']);
 const router = useRouter();
 
+const { mutate } = useMutation({
+    mutationFn: (id: number) => deleteCustomer(id),
+})
+
 const onDeleteClick = (item: ICustomer) => {
-    console.log(item)
+    if (confirm(`Are you sure to delete ${item.name}?`)) {
+        mutate(item.id, {
+            onSuccess: () => {
+                toastSuccess("Delete customer successful", 1500);
+                emit('deleteSuccess');
+            },
+            onError: (error) => {
+                console.log(error)
+            },
+        }
+        )
+    }
 }
 const onUpdateClick = (item: ICustomer) => {
     router.push(`/${item.id}`);

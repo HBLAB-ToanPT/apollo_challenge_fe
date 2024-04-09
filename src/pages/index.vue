@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import { useQuery } from '@tanstack/vue-query';
+import { useQuery, useQueryClient } from '@tanstack/vue-query';
 import { ref } from 'vue';
 import { getCustomers } from '../apis/customer.api';
 import Customers from '../components/Customers.vue';
@@ -11,6 +11,7 @@ const page = ref(1);
 const size = ref(10);
 const keys = ref<string[]>([]);
 
+const queryClient = useQueryClient()
 const { isPending, data } = useQuery({
   queryKey: ['customers', page, keys],
   queryFn: () => getCustomers({ page: page.value, size: size.value, keys: keys.value }),
@@ -26,6 +27,10 @@ const onSearch = (text: string) => {
   keys.value = text.split(',').map(key => key.trim());
 }
 
+const onDeleteSuccess = () => {
+  queryClient.invalidateQueries({ queryKey: ['customers', page, keys] })
+}
+
 </script>
 
 <template>
@@ -38,7 +43,7 @@ const onSearch = (text: string) => {
         </template>Add customer</v-btn>
     </div>
     <template v-if="!isPending">
-      <Customers class="mt-6" :items="data.data.content" />
+      <Customers class="mt-6" :items="data.data.content" @deleteSuccess="onDeleteSuccess" />
       <v-pagination v-model="page" :length="Math.ceil(data.data.numberOfElements / size)"
         rounded="circle"></v-pagination>
     </template>
