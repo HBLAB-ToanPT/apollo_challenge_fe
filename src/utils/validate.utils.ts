@@ -1,5 +1,5 @@
 export const nameWithRequireAnd20CharactersRules = [
-  (value) => {
+  (value: string) => {
     if (value) {
       if (value.length > 20) {
         return "Customer name is maximum 20 characters.";

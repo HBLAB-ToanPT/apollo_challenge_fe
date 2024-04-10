@@ -27,7 +27,7 @@ const onSearch = (text: string) => {
 }
 
 const onDeleteSuccess = () => {
-    if (Number(data.value?.data?.numberOfElements) === 1) {
+    if (Number(data.value?.data?.data?.numberOfElements) === 1) {
         page.value--;
     } else {
         queryClient.invalidateQueries({ queryKey: ['customers', page, keys] })
@@ -46,8 +46,8 @@ const onDeleteSuccess = () => {
                 </template>Add customer</v-btn>
         </div>
         <template v-if="!isPending">
-            <Customers class="mt-6" :items="data?.data?.content" @deleteSuccess="onDeleteSuccess" />
-            <v-pagination v-model="page" :length="data?.data?.totalPages" rounded="circle"></v-pagination>
+            <Customers class="mt-6" :items="data?.data?.data?.content" @deleteSuccess="onDeleteSuccess" />
+            <v-pagination v-model="page" :length="data?.data?.data?.totalPages" rounded="circle"></v-pagination>
         </template>
         <v-skeleton-loader v-if="isPending" type="table-tbody">
         </v-skeleton-loader>

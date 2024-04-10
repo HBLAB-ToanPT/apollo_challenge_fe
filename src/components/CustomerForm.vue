@@ -48,8 +48,8 @@ const onRemoveItem = (item: any) => {
             <!-- Customer tags -->
             <v-combobox v-model="model.tags" item-title="title" item-value="id" label="Add tags" multiple outlined
                 :allow-overflow="false">
-                <template v-slot:selection="{ attrs, item, selected }">
-                    <v-chip v-bind="attrs" :input-value="selected" label small>
+                <template v-slot:selection="{ item }">
+                    <v-chip label small>
                         <span class="pr-2">
                             {{ item.title }}
                         </span>
