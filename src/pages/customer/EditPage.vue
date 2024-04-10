@@ -4,12 +4,11 @@ import { computed } from 'vue';
 import { useRoute, useRouter } from 'vue-router';
 import { getCustomer, updateCustomer } from '../../apis/customer.api';
 import { ICustomerDto } from '../../types/customer.type';
-import { toastSuccess } from '../../utils/toastify.util';
+import { toastError, toastSuccess } from '../../utils/toastify.util';
 
 const route = useRoute();
 const router = useRouter();
 const id = computed(() => route.params.id);
-console.log(id.value)
 
 const { data } = useQuery({
     queryKey: ['customer', id.value],
@@ -18,7 +17,7 @@ const { data } = useQuery({
 });
 
 const customer = computed(() => {
-    return data.value ? data.value.data : undefined
+    return data.value ? data.value.data?.data : undefined
 })
 
 const { isPending, mutate } = useMutation({
@@ -27,9 +26,13 @@ const { isPending, mutate } = useMutation({
 
 const onFormSubmit = (customerDto: ICustomerDto) => {
     mutate({ id: `${id.value}`, customer: customerDto }, {
-        onSuccess: () => {
-            toastSuccess('Update customer successful');
-            router.push('/');
+        onSuccess: (data) => {
+            if (data.data.success) {
+                toastSuccess('Update customer successful');
+                router.push('/');
+            } else {
+                toastError(data.data.errorMessage || 'Something went wrong');
+            }
         },
         onError: (error) => {
             console.log(error)

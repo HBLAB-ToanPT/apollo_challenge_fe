@@ -3,7 +3,7 @@ import { useMutation } from '@tanstack/vue-query';
 import { useRouter } from 'vue-router';
 import { createCustomer } from '../../apis/customer.api';
 import { ICustomerDto } from '../../types/customer.type';
-import { toastSuccess } from '../../utils/toastify.util';
+import { toastError, toastSuccess } from '../../utils/toastify.util';
 const router = useRouter();
 
 const { isPending, mutate } = useMutation({
@@ -13,9 +13,13 @@ const { isPending, mutate } = useMutation({
 
 const onFormSubmit = (customer: ICustomerDto) => {
     mutate(customer, {
-        onSuccess: () => {
-            toastSuccess('Create new customer successful');
-            router.push('/');
+        onSuccess: (data) => {
+            if (data.data.success) {
+                toastSuccess('Create new customer successful');
+                router.push('/');
+            } else {
+                toastError(data.data.errorMessage || 'Something went wrong');
+            }
         },
         onError: (error) => {
             console.log(error)

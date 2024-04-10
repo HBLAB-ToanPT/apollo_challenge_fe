@@ -1,4 +1,10 @@
-export interface IPagination<T> {
+export interface IApiResponse<T> {
+  data: T;
+  errorMessage?: string;
+  success: boolean;
+}
+
+export interface IDataPagination<T> {
   content: T;
   pageable: IPageable;
   last: boolean;
