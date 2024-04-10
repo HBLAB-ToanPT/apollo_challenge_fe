@@ -1,18 +1,21 @@
 import httpRequest from "../configs/http.config";
-import { IPagination } from "../types/api.type";
+import { IApiResponse, IDataPagination } from "../types/api.type";
 import { ICustomer, ICustomerDto } from "../types/customer.type";
 import { IPaginateQueryParams } from "../types/query.type";
 
 export const getCustomers = (
   params: IPaginateQueryParams & { keys?: string[] }
 ) => {
-  return httpRequest.get<IPagination<ICustomer[]>>("/api/v1/customers", {
-    params,
-  });
+  return httpRequest.get<IApiResponse<IDataPagination<ICustomer[]>>>(
+    "/api/v1/customers",
+    {
+      params,
+    }
+  );
 };
 
 export const getCustomer = (id: number | string) => {
-  return httpRequest.get<ICustomer>("/api/v1/customers/" + id);
+  return httpRequest.get<IApiResponse<ICustomer>>("/api/v1/customers/" + id);
 };
 
 export const createCustomer = (customer: ICustomerDto) => {
@@ -28,7 +31,10 @@ export const createCustomer = (customer: ICustomerDto) => {
       }
     });
   }
-  return httpRequest.post<ICustomer>("/api/v1/customers", formData);
+  return httpRequest.post<IApiResponse<ICustomer>>(
+    "/api/v1/customers",
+    formData
+  );
 };
 
 export const updateCustomer = (id: number | string, customer: ICustomerDto) => {
@@ -44,9 +50,12 @@ export const updateCustomer = (id: number | string, customer: ICustomerDto) => {
       }
     });
   }
-  return httpRequest.put<ICustomer>("/api/v1/customers/" + id, formData);
+  return httpRequest.put<IApiResponse<ICustomer>>(
+    "/api/v1/customers/" + id,
+    formData
+  );
 };
 
 export const deleteCustomer = (id: number | string) => {
-  return httpRequest.delete("/api/v1/customers/" + id);
+  return httpRequest.delete<IApiResponse<boolean>>("/api/v1/customers/" + id);
 };

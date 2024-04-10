@@ -6,7 +6,7 @@ import { ICustomer } from '../types/customer.type';
 import { joinTags } from '../utils/tag.util';
 import { toastSuccess } from '../utils/toastify.util';
 
-const props = defineProps<{ items: ICustomer[] }>();
+const props = defineProps<{ items?: ICustomer[] }>();
 const emit = defineEmits(['deleteSuccess']);
 const router = useRouter();
 
