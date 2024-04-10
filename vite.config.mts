@@ -15,12 +15,7 @@ export default defineConfig({
 	plugins: [
 		Layouts(),
 		AutoImport({
-			imports: [
-				"vue",
-				{
-					"vue-router/auto": ["useRoute", "useRouter"],
-				},
-			],
+			imports: ["vue"],
 			dts: "src/auto-imports.d.ts",
 			eslintrc: {
 				enabled: true,

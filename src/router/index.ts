@@ -3,7 +3,7 @@
  *
  */
 
-import { createMemoryHistory, createRouter } from "vue-router";
+import { createWebHistory, createRouter } from "vue-router";
 import CreatePage from "../pages/customer/CreatePage.vue";
 import EditPage from "../pages/customer/EditPage.vue";
 import ListPage from "../pages/customer/ListPage.vue";
@@ -15,7 +15,7 @@ const routes = [
 ];
 
 const router = createRouter({
-  history: createMemoryHistory(),
+  history: createWebHistory(import.meta.env.BASE_URL),
   routes,
 });
 
