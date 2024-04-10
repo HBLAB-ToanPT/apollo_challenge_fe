@@ -1,15 +1,15 @@
 <script setup lang="ts">
 import { useMutation, useQuery } from '@tanstack/vue-query';
 import { computed } from 'vue';
-import { useRoute } from 'vue-router';
-import { ICustomerDto } from '../../types/customer.type';
+import { useRoute, useRouter } from 'vue-router';
 import { getCustomer, updateCustomer } from '../../apis/customer.api';
+import { ICustomerDto } from '../../types/customer.type';
 import { toastSuccess } from '../../utils/toastify.util';
-import { useRouter } from 'vue-router';
 
 const route = useRoute();
 const router = useRouter();
 const id = computed(() => route.params.id);
+console.log(id.value)
 
 const { data } = useQuery({
     queryKey: ['customer', id.value],
