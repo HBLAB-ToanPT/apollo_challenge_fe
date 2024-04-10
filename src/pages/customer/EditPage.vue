@@ -28,7 +28,7 @@ const { isPending, mutate } = useMutation({
 const onFormSubmit = (customerDto: ICustomerDto) => {
     mutate({ id: `${id.value}`, customer: customerDto }, {
         onSuccess: () => {
-            toastSuccess('Update customer successful', 1500);
+            toastSuccess('Update customer successful');
             router.push('/');
         },
         onError: (error) => {
