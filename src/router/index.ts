@@ -1,16 +1,22 @@
 /**
  * router/index.ts
  *
- * Automatic routes for `./src/pages/*.vue`
  */
 
-// Composables
-import { createRouter, createWebHistory } from 'vue-router/auto'
-import { setupLayouts } from 'virtual:generated-layouts'
+import { createMemoryHistory, createRouter } from "vue-router";
+import CreatePage from "../pages/customer/CreatePage.vue";
+import EditPage from "../pages/customer/EditPage.vue";
+import ListPage from "../pages/customer/ListPage.vue";
+
+const routes = [
+  { path: "/", component: ListPage },
+  { path: "/create", component: CreatePage },
+  { path: "/:id", component: EditPage },
+];
 
 const router = createRouter({
-  history: createWebHistory(import.meta.env.BASE_URL),
-  extendRoutes: setupLayouts,
-})
+  history: createMemoryHistory(),
+  routes,
+});
 
-export default router
+export default router;
