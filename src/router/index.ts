@@ -4,14 +4,15 @@
  */
 
 import { createWebHistory, createRouter } from "vue-router";
+import Default from "@/layouts/default.vue";
 import CreatePage from "../pages/customer/CreatePage.vue";
 import EditPage from "../pages/customer/EditPage.vue";
 import ListPage from "../pages/customer/ListPage.vue";
 
 const routes = [
-  { path: "/", component: ListPage },
-  { path: "/create", component: CreatePage },
-  { path: "/:id", component: EditPage },
+  { path: "/", component: ListPage, meta: { layout: Default } },
+  { path: "/create", component: CreatePage, meta: { layout: Default } },
+  { path: "/:id", component: EditPage, meta: { layout: Default } },
 ];
 
 const router = createRouter({
